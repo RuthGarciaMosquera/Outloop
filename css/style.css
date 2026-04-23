@@ -1287,7 +1287,7 @@ main {
     top: 512px;
     right: 6%;
     transform: rotate(-5deg);
-    background: linear
+    background: linear-gradient(180deg, #dbe7e3 0%, #b8d2c9 100%);
 }
 
 .post-it-mini .handwritten-note {
@@ -1889,6 +1889,311 @@ main {
     font-size: 0.98rem;
     line-height: 1.6;
     color: rgba(53,75,111,0.82);
+}
+
+/* MICROTREND SECTION */
+.microtrend-section {
+    width: 100%;
+    position: relative;
+    padding: 4rem 0 2rem;
+    color: var(--color-secundario);
+}
+
+.microtrend-intro {
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: 5;
+}
+
+.microtrend-title {
+    font-size: clamp(2rem, 4vw, 3.3rem);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-secundario);
+    margin-bottom: 0.6rem;
+}
+
+.microtrend-subtitle {
+    max-width: 720px;
+    margin: 0 auto;
+    color: rgba(252,246,222,0.78);
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.microtrend-stage {
+    position: relative;
+    height: 220vh;
+}
+
+.microtrend-sticky {
+    position: sticky;
+    top: 5.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.microtrend-box-wrap {
+    position: relative;
+    width: min(760px, 86vw);
+    height: min(620px, 72vh);
+    margin: 0 auto;
+}
+
+.microtrend-box {
+    position: absolute;
+    left: 50%;
+    width: min(420px, 54vw);
+    transform: translateX(-50%);
+    user-select: none;
+    pointer-events: none;
+}
+
+.microtrend-box-back {
+    bottom: 1.2rem;
+    z-index: 2;
+}
+
+.microtrend-box-front {
+    bottom: 1.2rem;
+    z-index: 8;
+    pointer-events: none;
+}
+
+/* ITEMS */
+.microtrend-item {
+    position: absolute;
+    left: 50%;
+    top: 73%;
+    width: clamp(72px, 9vw, 112px);
+    border: none;
+    background: transparent;
+    padding: 0;
+    opacity: 1;
+    z-index: 5;
+    pointer-events: none;
+
+    /* estado inicial: dentro de la caja */
+    --tx: 0px;
+    --ty: 40px;
+    --rot: 0deg;
+    --sc: 0.45;
+
+    transform: translate(-50%, -50%) translate(var(--tx), var(--ty)) rotate(var(--rot)) scale(var(--sc));
+    transition:
+        transform 1.1s cubic-bezier(0.22, 1, 0.36, 1),
+        filter 0.3s ease;
+    will-change: transform;
+}
+
+/* salen a diferente ritmo */
+.item-1 { transition-delay: 0.02s; }
+.item-2 { transition-delay: 0.12s; }
+.item-3 { transition-delay: 0.22s; }
+.item-4 { transition-delay: 0.30s; }
+.item-5 { transition-delay: 0.16s; }
+.item-6 { transition-delay: 0.38s; }
+.item-7 { transition-delay: 0.26s; }
+.item-8 { transition-delay: 0.46s; }
+
+/* estado inicial individual */
+.item-1 { --tx: -18px; --ty: 36px; --rot: -2deg; --sc: 0.42; transition-delay: 0.02s; }
+.item-2 { --tx: -10px; --ty: 34px; --rot: 1deg;  --sc: 0.44; transition-delay: 0.12s; }
+.item-3 { --tx: 0px;   --ty: 38px; --rot: -1deg; --sc: 0.43; transition-delay: 0.22s; }
+.item-4 { --tx: 12px;  --ty: 35px; --rot: 2deg;  --sc: 0.45; transition-delay: 0.30s; }
+.item-5 { --tx: 22px;  --ty: 37px; --rot: -2deg; --sc: 0.43; transition-delay: 0.16s; }
+.item-6 { --tx: -6px;  --ty: 42px; --rot: 1deg;  --sc: 0.44; transition-delay: 0.38s; }
+.item-7 { --tx: 8px;   --ty: 40px; --rot: -1deg; --sc: 0.42; transition-delay: 0.26s; }
+.item-8 { --tx: 16px;  --ty: 39px; --rot: 2deg;  --sc: 0.44; transition-delay: 0.46s; }
+
+.microtrend-item img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 8px 14px rgba(0,0,0,0.18));
+}
+
+.microtrend-item:hover img {
+    filter: drop-shadow(0 10px 16px rgba(0,0,0,0.24));
+}
+
+.microtrend-section.is-open .microtrend-item {
+    pointer-events: auto;
+}
+
+/* posición final repartida */
+.microtrend-section.is-open .item-1 {
+    --tx: -260px;
+    --ty: -300px;
+    --rot: -9deg;
+    --sc: 1;
+}
+.microtrend-section.is-open .item-2 {
+    --tx: -140px;
+    --ty: -330px;
+    --rot: 6deg;
+    --sc: 1;
+}
+.microtrend-section.is-open .item-3 {
+    --tx: 0px;
+    --ty: -345px;
+    --rot: -4deg;
+    --sc: 1;
+}
+.microtrend-section.is-open .item-4 {
+    --tx: 145px;
+    --ty: -315px;
+    --rot: 8deg;
+    --sc: 1;
+}
+.microtrend-section.is-open .item-5 {
+    --tx: 275px;
+    --ty: -285px;
+    --rot: -7deg;
+    --sc: 1;
+}
+.microtrend-section.is-open .item-6 {
+    --tx: -185px;
+    --ty: -175px;
+    --rot: 10deg;
+    --sc: 1;
+}
+.microtrend-section.is-open .item-7 {
+    --tx: 65px;
+    --ty: -190px;
+    --rot: -10deg;
+    --sc: 1;
+}
+.microtrend-section.is-open .item-8 {
+    --tx: 225px;
+    --ty: -170px;
+    --rot: 5deg;
+    --sc: 1;
+}
+
+/* MODAL */
+.microtrend-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.42);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    z-index: 5000;
+}
+
+.microtrend-modal.is-open {
+    display: flex;
+}
+
+.microtrend-modal-card {
+    width: min(480px, 92vw);
+    background: var(--color-secundario);
+    color: var(--color-ticket-primario);
+    border: 1px solid rgba(53,75,111,0.14);
+    box-shadow:
+        0 18px 34px rgba(0,0,0,0.22),
+        inset 0 1px 0 rgba(255,255,255,0.4);
+    padding: 1.4rem 1.4rem 1.2rem;
+    position: relative;
+    border-radius: 1.25rem;
+}
+
+.microtrend-modal-card::after {
+    content: "";
+    position: absolute;
+    inset: 8px;
+    border: 1px dashed rgba(94,140,135,0.28);
+    border-radius: 1rem;
+    pointer-events: none;
+}
+
+.microtrend-modal-kicker {
+    font-family: 'VT323', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: rgba(53,75,111,0.78);
+    margin-bottom: 0.45rem;
+    position: relative;
+    z-index: 1;
+}
+
+.microtrend-modal-card h3 {
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.8rem;
+    position: relative;
+    z-index: 1;
+}
+
+.microtrend-modal-card p:last-child {
+    margin-bottom: 0;
+    line-height: 1.65;
+    position: relative;
+    z-index: 1;
+}
+
+.microtrend-modal-close {
+    position: absolute;
+    top: 0.7rem;
+    right: 0.9rem;
+    border: none;
+    background: transparent;
+    font-size: 2rem;
+    line-height: 1;
+    color: var(--color-ticket-primario);
+    z-index: 2;
+}
+
+/* RESPONSIVE MICROTREND */
+@media (max-width: 768px) {
+    .microtrend-stage {
+        height: 180vh;
+    }
+
+    .microtrend-sticky {
+        top: 5.2rem;
+        height: calc(100vh - 5.4rem);
+    }
+
+    .microtrend-box-wrap {
+        width: 94vw;
+        height: 78vh;
+    }
+
+    .microtrend-box {
+        width: min(290px, 72vw);
+    }
+
+    .microtrend-box-back {
+        bottom: 4rem;
+    }
+
+    .microtrend-box-front {
+        bottom: 3.2rem;
+    }
+
+    .microtrend-item {
+        width: clamp(62px, 15vw, 88px);
+    }
+
+    .microtrend-section.is-open .item-1 { left: 15%; top: 10%; }
+    .microtrend-section.is-open .item-2 { left: 38%; top: 7%; }
+    .microtrend-section.is-open .item-3 { left: 63%; top: 10%; }
+    .microtrend-section.is-open .item-4 { left: 86%; top: 15%; }
+    .microtrend-section.is-open .item-5 { left: 21%; top: 30%; }
+    .microtrend-section.is-open .item-6 { left: 46%; top: 26%; }
+    .microtrend-section.is-open .item-7 { left: 72%; top: 29%; }
+    .microtrend-section.is-open .item-8 { left: 88%; top: 34%; }
+
+    .microtrend-subtitle {
+        padding: 0 1rem;
+        font-size: 0.92rem;
+    }
 }
 
 /* SECCIÓN CALENDARIO */

@@ -456,17 +456,153 @@ if ($designerTrack.length) {
         retoElemento.textContent = retoAleatorio;
     }
 
-    // sección calendario
-    // CALENDARIO
+//     // sección calendario
+//     // CALENDARIO
 
-const eventos = {
-    "2026-04-24": "Fashion Revolution Day",
-    "2026-04-22": "Earth Day",
-    "2026-05-01": "Slow Fashion Awareness",
-    "2026-06-05": "World Environment Day"
-};
+// const eventos = {
+//     "2026-04-24": "Fashion Revolution Day",
+//     "2026-04-22": "Earth Day",
+//     "2026-05-01": "Slow Fashion Awareness",
+//     "2026-06-05": "World Environment Day"
+// };
 
-let fechaActual = new Date();
+// let fechaActual = new Date();
+
+// const grid = document.getElementById("calendarGrid");
+// const mesTexto = document.getElementById("mesActual");
+// const noteModal = document.getElementById("calendarNoteModal");
+// const noteDateTitle = document.getElementById("calendarNoteDate");
+// const fixedEventText = document.getElementById("calendarFixedEvent");
+// const userNoteTextarea = document.getElementById("calendarUserNote");
+// const guardarNotaBtn = document.getElementById("guardarNotaBtn");
+// const borrarNotaBtn = document.getElementById("borrarNotaBtn");
+// const cerrarNotaModal = document.getElementById("cerrarNotaModal");
+
+// let fechaSeleccionada = null;
+
+// function obtenerNotasCalendario() {
+//     return JSON.parse(localStorage.getItem("calendarNotes")) || {};
+// }
+
+// function guardarNotasCalendario(notas) {
+//     localStorage.setItem("calendarNotes", JSON.stringify(notas));
+// }
+
+// function renderCalendario(fecha) {
+//     grid.innerHTML = "";
+
+//     const año = fecha.getFullYear();
+//     const mes = fecha.getMonth();
+
+//     let primerDia = new Date(año, mes, 1).getDay();
+//         primerDia = primerDia === 0 ? 6 : primerDia - 1;    
+//     const diasMes = new Date(año, mes + 1, 0).getDate();
+
+//     const nombresMes = [
+//         "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+//         "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+//     ];
+
+//     mesTexto.textContent = `${nombresMes[mes]} ${año}`;
+
+//     // espacios vacíos inicio
+//     for (let i = 0; i < primerDia; i++) {
+//         grid.innerHTML += `<div class="calendar-empty"></div>`;
+//     }
+
+//     const notas = obtenerNotasCalendario();
+
+//     for (let d = 1; d <= diasMes; d++) {
+//         const fechaStr = `${año}-${String(mes+1).padStart(2,"0")}-${String(d).padStart(2,"0")}`;
+
+//         const evento = eventos[fechaStr];
+//         const notaUsuario = notas[fechaStr];
+//         const tieneNota = !!notaUsuario;
+
+//         grid.innerHTML += `
+//             <div class="calendar-day ${tieneNota ? 'has-note' : ''}" data-fecha="${fechaStr}">
+//                 <div class="day-number">${d}</div>
+//                 ${evento ? `<div class="event">${evento}</div>` : ""}
+//                 ${notaUsuario ? `<div class="user-note-preview">${notaUsuario}</div>` : ""}
+//             </div>
+//         `;
+//     }
+//     }
+
+//     document.getElementById("prevMes").onclick = () => {
+//         fechaActual.setMonth(fechaActual.getMonth() - 1);
+//         renderCalendario(fechaActual);
+//     };
+
+//     document.getElementById("nextMes").onclick = () => {
+//         fechaActual.setMonth(fechaActual.getMonth() + 1);
+//         renderCalendario(fechaActual);
+//     };
+
+//     renderCalendario(fechaActual);
+
+//     grid.addEventListener("click", function(e) {
+//     const day = e.target.closest(".calendar-day");
+//     if (!day) return;
+
+//     fechaSeleccionada = day.dataset.fecha;
+
+//     const notas = obtenerNotasCalendario();
+//     const notaGuardada = notas[fechaSeleccionada] || "";
+//     const eventoFijo = eventos[fechaSeleccionada] || "";
+
+//     noteDateTitle.textContent = fechaSeleccionada;
+//     fixedEventText.textContent = eventoFijo ? `Evento: ${eventoFijo}` : "Sin evento destacado";
+//     userNoteTextarea.value = notaGuardada;
+
+//     noteModal.classList.add("is-open");
+//     document.body.classList.add("no-scroll");
+//     });
+//     guardarNotaBtn.addEventListener("click", function() {
+//         if (!fechaSeleccionada) return;
+
+//         const notas = obtenerNotasCalendario();
+//         const valor = userNoteTextarea.value.trim();
+
+//         if (valor) {
+//             notas[fechaSeleccionada] = valor;
+//         } else {
+//             delete notas[fechaSeleccionada];
+//         }
+
+//         guardarNotasCalendario(notas);
+//         noteModal.classList.remove("is-open");
+//         document.body.classList.remove("no-scroll");
+//         renderCalendario(fechaActual);
+//     });
+
+//     borrarNotaBtn.addEventListener("click", function() {
+//         if (!fechaSeleccionada) return;
+
+//         const notas = obtenerNotasCalendario();
+//         delete notas[fechaSeleccionada];
+//         guardarNotasCalendario(notas);
+
+//         userNoteTextarea.value = "";
+//         noteModal.classList.remove("is-open");
+//         document.body.classList.remove("no-scroll");
+//         renderCalendario(fechaActual);
+//     });
+
+//     cerrarNotaModal.addEventListener("click", function() {
+//         noteModal.classList.remove("is-open");
+//         document.body.classList.remove("no-scroll");
+//     });
+
+//     noteModal.addEventListener("click", function(e) {
+//         if (e.target === noteModal) {
+//             noteModal.classList.remove("is-open");
+//             document.body.classList.remove("no-scroll");
+//         }
+//     });    
+
+// sección calendario
+// CALENDARIO
 
 const grid = document.getElementById("calendarGrid");
 const mesTexto = document.getElementById("mesActual");
@@ -477,130 +613,197 @@ const userNoteTextarea = document.getElementById("calendarUserNote");
 const guardarNotaBtn = document.getElementById("guardarNotaBtn");
 const borrarNotaBtn = document.getElementById("borrarNotaBtn");
 const cerrarNotaModal = document.getElementById("cerrarNotaModal");
+const prevMesBtn = document.getElementById("prevMes");
+const nextMesBtn = document.getElementById("nextMes");
 
-let fechaSeleccionada = null;
+if (grid && mesTexto && prevMesBtn && nextMesBtn) {
+    const eventos = {
+        "2026-04-24": "Fashion Revolution Day",
+        "2026-04-22": "Earth Day",
+        "2026-05-01": "Slow Fashion Awareness",
+        "2026-06-05": "World Environment Day"
+    };
 
-function obtenerNotasCalendario() {
-    return JSON.parse(localStorage.getItem("calendarNotes")) || {};
-}
+    let fechaActual = new Date();
+    let fechaSeleccionada = null;
 
-function guardarNotasCalendario(notas) {
-    localStorage.setItem("calendarNotes", JSON.stringify(notas));
-}
-
-function renderCalendario(fecha) {
-    grid.innerHTML = "";
-
-    const año = fecha.getFullYear();
-    const mes = fecha.getMonth();
-
-    let primerDia = new Date(año, mes, 1).getDay();
-        primerDia = primerDia === 0 ? 6 : primerDia - 1;    
-    const diasMes = new Date(año, mes + 1, 0).getDate();
-
-    const nombresMes = [
-        "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
-        "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
-    ];
-
-    mesTexto.textContent = `${nombresMes[mes]} ${año}`;
-
-    // espacios vacíos inicio
-    for (let i = 0; i < primerDia; i++) {
-        grid.innerHTML += `<div class="calendar-empty"></div>`;
+    function obtenerNotasCalendario() {
+        return JSON.parse(localStorage.getItem("calendarNotes")) || {};
     }
 
-    const notas = obtenerNotasCalendario();
-
-    for (let d = 1; d <= diasMes; d++) {
-        const fechaStr = `${año}-${String(mes+1).padStart(2,"0")}-${String(d).padStart(2,"0")}`;
-
-        const evento = eventos[fechaStr];
-        const notaUsuario = notas[fechaStr];
-        const tieneNota = !!notaUsuario;
-
-        grid.innerHTML += `
-            <div class="calendar-day ${tieneNota ? 'has-note' : ''}" data-fecha="${fechaStr}">
-                <div class="day-number">${d}</div>
-                ${evento ? `<div class="event">${evento}</div>` : ""}
-                ${notaUsuario ? `<div class="user-note-preview">${notaUsuario}</div>` : ""}
-            </div>
-        `;
-    }
+    function guardarNotasCalendario(notas) {
+        localStorage.setItem("calendarNotes", JSON.stringify(notas));
     }
 
-    document.getElementById("prevMes").onclick = () => {
+    function renderCalendario(fecha) {
+        grid.innerHTML = "";
+
+        const año = fecha.getFullYear();
+        const mes = fecha.getMonth();
+
+        let primerDia = new Date(año, mes, 1).getDay();
+        primerDia = primerDia === 0 ? 6 : primerDia - 1;
+        const diasMes = new Date(año, mes + 1, 0).getDate();
+
+        const nombresMes = [
+            "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+            "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+        ];
+
+        mesTexto.textContent = `${nombresMes[mes]} ${año}`;
+
+        for (let i = 0; i < primerDia; i++) {
+            grid.innerHTML += `<div class="calendar-empty"></div>`;
+        }
+
+        const notas = obtenerNotasCalendario();
+
+        for (let d = 1; d <= diasMes; d++) {
+            const fechaStr = `${año}-${String(mes + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
+
+            const evento = eventos[fechaStr];
+            const notaUsuario = notas[fechaStr];
+            const tieneNota = !!notaUsuario;
+
+            grid.innerHTML += `
+                <div class="calendar-day ${tieneNota ? 'has-note' : ''}" data-fecha="${fechaStr}">
+                    <div class="day-number">${d}</div>
+                    ${evento ? `<div class="event">${evento}</div>` : ""}
+                    ${notaUsuario ? `<div class="user-note-preview">${notaUsuario}</div>` : ""}
+                </div>
+            `;
+        }
+    }
+
+    prevMesBtn.onclick = () => {
         fechaActual.setMonth(fechaActual.getMonth() - 1);
         renderCalendario(fechaActual);
     };
 
-    document.getElementById("nextMes").onclick = () => {
+    nextMesBtn.onclick = () => {
         fechaActual.setMonth(fechaActual.getMonth() + 1);
         renderCalendario(fechaActual);
     };
 
     renderCalendario(fechaActual);
 
-    grid.addEventListener("click", function(e) {
-    const day = e.target.closest(".calendar-day");
-    if (!day) return;
+    if (noteModal && noteDateTitle && fixedEventText && userNoteTextarea && guardarNotaBtn && borrarNotaBtn && cerrarNotaModal) {
+        grid.addEventListener("click", function(e) {
+            const day = e.target.closest(".calendar-day");
+            if (!day) return;
 
-    fechaSeleccionada = day.dataset.fecha;
+            fechaSeleccionada = day.dataset.fecha;
 
-    const notas = obtenerNotasCalendario();
-    const notaGuardada = notas[fechaSeleccionada] || "";
-    const eventoFijo = eventos[fechaSeleccionada] || "";
+            const notas = obtenerNotasCalendario();
+            const notaGuardada = notas[fechaSeleccionada] || "";
+            const eventoFijo = eventos[fechaSeleccionada] || "";
 
-    noteDateTitle.textContent = fechaSeleccionada;
-    fixedEventText.textContent = eventoFijo ? `Evento: ${eventoFijo}` : "Sin evento destacado";
-    userNoteTextarea.value = notaGuardada;
+            noteDateTitle.textContent = fechaSeleccionada;
+            fixedEventText.textContent = eventoFijo ? `Evento: ${eventoFijo}` : "Sin evento destacado";
+            userNoteTextarea.value = notaGuardada;
 
-    noteModal.classList.add("is-open");
-    document.body.classList.add("no-scroll");
-    });
-    guardarNotaBtn.addEventListener("click", function() {
-        if (!fechaSeleccionada) return;
+            noteModal.classList.add("is-open");
+            document.body.classList.add("no-scroll");
+        });
 
-        const notas = obtenerNotasCalendario();
-        const valor = userNoteTextarea.value.trim();
+        guardarNotaBtn.addEventListener("click", function() {
+            if (!fechaSeleccionada) return;
 
-        if (valor) {
-            notas[fechaSeleccionada] = valor;
-        } else {
-            delete notas[fechaSeleccionada];
-        }
+            const notas = obtenerNotasCalendario();
+            const valor = userNoteTextarea.value.trim();
 
-        guardarNotasCalendario(notas);
-        noteModal.classList.remove("is-open");
-        document.body.classList.remove("no-scroll");
-        renderCalendario(fechaActual);
-    });
+            if (valor) {
+                notas[fechaSeleccionada] = valor;
+            } else {
+                delete notas[fechaSeleccionada];
+            }
 
-    borrarNotaBtn.addEventListener("click", function() {
-        if (!fechaSeleccionada) return;
-
-        const notas = obtenerNotasCalendario();
-        delete notas[fechaSeleccionada];
-        guardarNotasCalendario(notas);
-
-        userNoteTextarea.value = "";
-        noteModal.classList.remove("is-open");
-        document.body.classList.remove("no-scroll");
-        renderCalendario(fechaActual);
-    });
-
-    cerrarNotaModal.addEventListener("click", function() {
-        noteModal.classList.remove("is-open");
-        document.body.classList.remove("no-scroll");
-    });
-
-    noteModal.addEventListener("click", function(e) {
-        if (e.target === noteModal) {
+            guardarNotasCalendario(notas);
             noteModal.classList.remove("is-open");
             document.body.classList.remove("no-scroll");
-        }
-    });    
+            renderCalendario(fechaActual);
+        });
 
-    
+        borrarNotaBtn.addEventListener("click", function() {
+            if (!fechaSeleccionada) return;
+
+            const notas = obtenerNotasCalendario();
+            delete notas[fechaSeleccionada];
+            guardarNotasCalendario(notas);
+
+            userNoteTextarea.value = "";
+            noteModal.classList.remove("is-open");
+            document.body.classList.remove("no-scroll");
+            renderCalendario(fechaActual);
+        });
+
+        cerrarNotaModal.addEventListener("click", function() {
+            noteModal.classList.remove("is-open");
+            document.body.classList.remove("no-scroll");
+        });
+
+        noteModal.addEventListener("click", function(e) {
+            if (e.target === noteModal) {
+                noteModal.classList.remove("is-open");
+                document.body.classList.remove("no-scroll");
+            }
+        });
+    }
+}
+
+        // MICROTREND
+    const microtrendSection = document.querySelector('.microtrend-section');
+    const microtrendModal = document.getElementById('microtrendModal');
+    const microtrendModalTitle = document.getElementById('microtrendModalTitle');
+    const microtrendModalText = document.getElementById('microtrendModalText');
+    const microtrendModalClose = document.getElementById('microtrendModalClose');
+    const microtrendItems = document.querySelectorAll('.microtrend-item');
+
+    if (microtrendSection) {
+        function updateMicrotrendState() {
+            const frontBox = document.querySelector('.microtrend-box-front');
+            if (!frontBox) return;
+
+            const frontRect = frontBox.getBoundingClientRect();
+            const triggerLine = window.innerHeight * 0.88;
+
+            if (frontRect.bottom <= triggerLine && frontRect.top < window.innerHeight) {
+                microtrendSection.classList.add('is-open');
+            } else {
+                microtrendSection.classList.remove('is-open');
+            }
+        }
+
+        updateMicrotrendState();
+        window.addEventListener('scroll', updateMicrotrendState);
+        window.addEventListener('resize', updateMicrotrendState);
+
+        microtrendItems.forEach((item) => {
+            item.addEventListener('click', function () {
+                const title = this.dataset.title || '';
+                const text = this.dataset.text || '';
+
+                microtrendModalTitle.textContent = title;
+                microtrendModalText.textContent = text;
+                microtrendModal.classList.add('is-open');
+                document.body.classList.add('no-scroll');
+            });
+        });
+    }
+
+    if (microtrendModal && microtrendModalClose) {
+        function closeMicrotrendModal() {
+            microtrendModal.classList.remove('is-open');
+            document.body.classList.remove('no-scroll');
+        }
+
+        microtrendModalClose.addEventListener('click', closeMicrotrendModal);
+
+        microtrendModal.addEventListener('click', function (e) {
+            if (e.target === microtrendModal) {
+                closeMicrotrendModal();
+            }
+        });
+    }
 
 });
