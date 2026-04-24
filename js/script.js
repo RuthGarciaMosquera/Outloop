@@ -1,4 +1,5 @@
 $(function() {
+    // registro
 
      if (typeof AOS !== 'undefined') {
         AOS.init({
@@ -41,20 +42,40 @@ $(function() {
         }
     }
 
-    if ($body.is('.page-datos, .page-diseñadores')) {
-        $header.addClass('scrolled');
-        $body.addClass('scrolled');
-    } else {
-        $window.on('scroll', function() {
-            if ($window.scrollTop() > 50) {
-                $header.addClass('scrolled');
-                $body.addClass('scrolled');
-            } else {
-                $header.removeClass('scrolled');
-                $body.removeClass('scrolled');
-            }
-        });
-    }
+// HEADER comportamiento scroll + click
+let headerClicked = false;
+
+function shrinkHeader() {
+    headerClicked = true;
+    $header.addClass('scrolled');
+    $body.addClass('scrolled');
+}
+
+if ($body.is('.page-datos, .page-diseñadores')) {
+    shrinkHeader();
+} else {
+
+    $header.on('click', function(e) {
+        if (!$header.hasClass('scrolled')) {
+            e.preventDefault();
+            e.stopPropagation();
+            shrinkHeader();
+        }
+    });
+
+    $window.on('scroll', function() {
+        if ($window.scrollTop() > 50 || headerClicked) {
+            $header.addClass('scrolled');
+            $body.addClass('scrolled');
+        } else {
+            $header.removeClass('scrolled');
+            $body.removeClass('scrolled');
+        }
+    });
+
+}
+
+// login
 
     const $viewLogin = $('#view-login');
     const $viewRegistro = $('#view-registro');
@@ -140,6 +161,23 @@ $(function() {
     
     $('#ano-actual').text(new Date().getFullYear());
 
+    // sección 1.1
+    // HERO BACKGROUND SLIDER
+    const heroBgs = document.querySelectorAll('.hero-bg');
+
+    if (heroBgs.length) {
+        let heroIndex = 0;
+
+        setInterval(function () {
+            heroBgs[heroIndex].classList.remove('is-active');
+
+            heroIndex = (heroIndex + 1) % heroBgs.length;
+
+            heroBgs[heroIndex].classList.add('is-active');
+        }, 2000);
+    }
+
+    // sección 1.2
     const $aboutArea = $('#about-me-area');
     const $aboutCards = $('.about-card');
     const $aboutOverlay = $('#about-overlay');
@@ -456,154 +494,7 @@ if ($designerTrack.length) {
         retoElemento.textContent = retoAleatorio;
     }
 
-//     // sección calendario
-//     // CALENDARIO
-
-// const eventos = {
-//     "2026-04-24": "Fashion Revolution Day",
-//     "2026-04-22": "Earth Day",
-//     "2026-05-01": "Slow Fashion Awareness",
-//     "2026-06-05": "World Environment Day"
-// };
-
-// let fechaActual = new Date();
-
-// const grid = document.getElementById("calendarGrid");
-// const mesTexto = document.getElementById("mesActual");
-// const noteModal = document.getElementById("calendarNoteModal");
-// const noteDateTitle = document.getElementById("calendarNoteDate");
-// const fixedEventText = document.getElementById("calendarFixedEvent");
-// const userNoteTextarea = document.getElementById("calendarUserNote");
-// const guardarNotaBtn = document.getElementById("guardarNotaBtn");
-// const borrarNotaBtn = document.getElementById("borrarNotaBtn");
-// const cerrarNotaModal = document.getElementById("cerrarNotaModal");
-
-// let fechaSeleccionada = null;
-
-// function obtenerNotasCalendario() {
-//     return JSON.parse(localStorage.getItem("calendarNotes")) || {};
-// }
-
-// function guardarNotasCalendario(notas) {
-//     localStorage.setItem("calendarNotes", JSON.stringify(notas));
-// }
-
-// function renderCalendario(fecha) {
-//     grid.innerHTML = "";
-
-//     const año = fecha.getFullYear();
-//     const mes = fecha.getMonth();
-
-//     let primerDia = new Date(año, mes, 1).getDay();
-//         primerDia = primerDia === 0 ? 6 : primerDia - 1;    
-//     const diasMes = new Date(año, mes + 1, 0).getDate();
-
-//     const nombresMes = [
-//         "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
-//         "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
-//     ];
-
-//     mesTexto.textContent = `${nombresMes[mes]} ${año}`;
-
-//     // espacios vacíos inicio
-//     for (let i = 0; i < primerDia; i++) {
-//         grid.innerHTML += `<div class="calendar-empty"></div>`;
-//     }
-
-//     const notas = obtenerNotasCalendario();
-
-//     for (let d = 1; d <= diasMes; d++) {
-//         const fechaStr = `${año}-${String(mes+1).padStart(2,"0")}-${String(d).padStart(2,"0")}`;
-
-//         const evento = eventos[fechaStr];
-//         const notaUsuario = notas[fechaStr];
-//         const tieneNota = !!notaUsuario;
-
-//         grid.innerHTML += `
-//             <div class="calendar-day ${tieneNota ? 'has-note' : ''}" data-fecha="${fechaStr}">
-//                 <div class="day-number">${d}</div>
-//                 ${evento ? `<div class="event">${evento}</div>` : ""}
-//                 ${notaUsuario ? `<div class="user-note-preview">${notaUsuario}</div>` : ""}
-//             </div>
-//         `;
-//     }
-//     }
-
-//     document.getElementById("prevMes").onclick = () => {
-//         fechaActual.setMonth(fechaActual.getMonth() - 1);
-//         renderCalendario(fechaActual);
-//     };
-
-//     document.getElementById("nextMes").onclick = () => {
-//         fechaActual.setMonth(fechaActual.getMonth() + 1);
-//         renderCalendario(fechaActual);
-//     };
-
-//     renderCalendario(fechaActual);
-
-//     grid.addEventListener("click", function(e) {
-//     const day = e.target.closest(".calendar-day");
-//     if (!day) return;
-
-//     fechaSeleccionada = day.dataset.fecha;
-
-//     const notas = obtenerNotasCalendario();
-//     const notaGuardada = notas[fechaSeleccionada] || "";
-//     const eventoFijo = eventos[fechaSeleccionada] || "";
-
-//     noteDateTitle.textContent = fechaSeleccionada;
-//     fixedEventText.textContent = eventoFijo ? `Evento: ${eventoFijo}` : "Sin evento destacado";
-//     userNoteTextarea.value = notaGuardada;
-
-//     noteModal.classList.add("is-open");
-//     document.body.classList.add("no-scroll");
-//     });
-//     guardarNotaBtn.addEventListener("click", function() {
-//         if (!fechaSeleccionada) return;
-
-//         const notas = obtenerNotasCalendario();
-//         const valor = userNoteTextarea.value.trim();
-
-//         if (valor) {
-//             notas[fechaSeleccionada] = valor;
-//         } else {
-//             delete notas[fechaSeleccionada];
-//         }
-
-//         guardarNotasCalendario(notas);
-//         noteModal.classList.remove("is-open");
-//         document.body.classList.remove("no-scroll");
-//         renderCalendario(fechaActual);
-//     });
-
-//     borrarNotaBtn.addEventListener("click", function() {
-//         if (!fechaSeleccionada) return;
-
-//         const notas = obtenerNotasCalendario();
-//         delete notas[fechaSeleccionada];
-//         guardarNotasCalendario(notas);
-
-//         userNoteTextarea.value = "";
-//         noteModal.classList.remove("is-open");
-//         document.body.classList.remove("no-scroll");
-//         renderCalendario(fechaActual);
-//     });
-
-//     cerrarNotaModal.addEventListener("click", function() {
-//         noteModal.classList.remove("is-open");
-//         document.body.classList.remove("no-scroll");
-//     });
-
-//     noteModal.addEventListener("click", function(e) {
-//         if (e.target === noteModal) {
-//             noteModal.classList.remove("is-open");
-//             document.body.classList.remove("no-scroll");
-//         }
-//     });    
-
-// sección calendario
-// CALENDARIO
-
+// calendario
 const grid = document.getElementById("calendarGrid");
 const mesTexto = document.getElementById("mesActual");
 const noteModal = document.getElementById("calendarNoteModal");
@@ -765,7 +656,7 @@ if (grid && mesTexto && prevMesBtn && nextMesBtn) {
             if (!frontBox) return;
 
             const frontRect = frontBox.getBoundingClientRect();
-            const triggerLine = window.innerHeight * 0.88;
+            const triggerLine = window.innerHeight * 1.15;
 
             if (frontRect.bottom <= triggerLine && frontRect.top < window.innerHeight) {
                 microtrendSection.classList.add('is-open');
