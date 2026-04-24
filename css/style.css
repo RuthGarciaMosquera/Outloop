@@ -334,53 +334,211 @@ main {
     0% { transform: translateX(0); } 
     100% { transform: translateX(-50%); } 
 }
+
 /* sección 1.2 - reto */
 .reto-section {
     width: 100%;
     min-height: 100vh;
-    background-image: url('../media/img/1x/fondoencajereto.png');
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
     background-color: var(--color-fondo);
+    color: var(--color-secundario);
+    background-size: contain;
 
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     position: relative;
+    overflow: hidden;
+    padding: 6rem 1.5rem;
 }
 
+.reto-kicker, .reto-title {
+    color: var(--color-fondo-secundario);
+}
+/* textura pana / terciopelo rojo */
 .reto-section::before {
+    content: "";
     position: absolute;
     inset: 0;
-    z-index: 1;
+    background:
+        repeating-linear-gradient(
+            90deg,
+            rgba(255,255,255,0.045) 0px,
+            rgba(255,255,255,0.045) 2px,
+            rgba(0,0,0,0.10) 3px,
+            transparent 8px
+        ),
+        radial-gradient(circle at 20% 15%, rgba(255,255,255,0.12), transparent 24%),
+        radial-gradient(circle at 80% 70%, rgba(0,0,0,0.22), transparent 28%),
+        linear-gradient(135deg, #8f1d2a 0%, var(--color-fondo) 45%, #4a0d16 100%);
+    background-size: auto, auto, auto, 100% 100%;
+    pointer-events: none;
 }
 
-.reto-overlay {
+.reto-section::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, transparent 45%, rgba(0,0,0,0.35) 100%);
+    pointer-events: none;
+}
+
+.reto-content {
     position: relative;
     z-index: 2;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    max-width: 45vh;
-    width: 100%;
+    width: min(760px, 92vw);
 }
 
-.reto-titulo-img {
-    width: 100%;
-    max-width: 320px;
-    height: auto;
-    object-fit: contain;
+
+.reto-kicker::before,
+.reto-kicker::after {
+    content: "✤";
+    margin: 0 0.8rem;
+    font-size: 0.85rem;
+}
+
+.reto-title {
+    font-family: 'Edwardian';
+    font-size: 3em;
+}
+
+/* tela + sobre */
+.reto-card {
+    position: relative;
+    width: min(620px, 92vw);
+    min-height: 430px;
+    margin: 0 auto;
+    padding: 3rem;
+
+    background:
+        radial-gradient(circle at 25% 20%, rgba(255,255,255,0.55), transparent 26%),
+        repeating-linear-gradient(
+            90deg,
+            rgba(53,75,111,0.06) 0px,
+            rgba(53,75,111,0.06) 1px,
+            transparent 1px,
+            transparent 7px
+        ),
+        repeating-linear-gradient(
+            0deg,
+            rgba(53,75,111,0.045) 0px,
+            rgba(53,75,111,0.045) 1px,
+            transparent 1px,
+            transparent 6px
+        ),
+        #e8b1c3a4;
+
+    color: var(--color-fondo);
+    border-radius: 1.2rem 1.2rem 0.6rem 0.6rem;
+    box-shadow:
+        0 24px 45px rgba(0,0,0,0.38),
+        inset 0 0 28px rgba(255,255,255,0.45);
+    overflow: visible;
+}
+
+/* encaje superior */
+.reto-card::before {
+    content: "";
+    position: absolute;
+    left: -48px;
+    right: -48px;
+    bottom: 28px;
+    height: 330px;
+    z-index: -1;
+
+    background:
+        linear-gradient(145deg, transparent 49%, rgba(190,165,125,0.65) 50%, transparent 51%) left bottom / 50% 100% no-repeat,
+        linear-gradient(215deg, transparent 49%, rgba(190,165,125,0.65) 50%, transparent 51%) right bottom / 50% 100% no-repeat,
+        linear-gradient(to bottom, #f4ead4 0%, #d9c7a5 100%);
+
+    clip-path: polygon(0 38%, 50% 0, 100% 38%, 100% 100%, 0 100%);
+    box-shadow:
+        0 18px 32px rgba(0,0,0,0.30),
+        inset 0 2px 18px rgba(255,255,255,0.55);
+    pointer-events: none;
+}
+
+/* sobre frontal */
+.reto-card::after {
+    content: "";
+    position: absolute;
+    left: -48px;
+    right: -48px;
+    bottom: -48px;
+    height: 300px;
+    z-index: 5;
+
+    background:
+        linear-gradient(145deg, transparent 49.5%, rgba(190,165,125,0.58) 50%, transparent 51%) left bottom / 50% 100% no-repeat,
+        linear-gradient(215deg, transparent 49.5%, rgba(190,165,125,0.58) 50%, transparent 51%) right bottom / 50% 100% no-repeat,
+        linear-gradient(to bottom, #f7ecd8 0%, #d8c3a0 100%);
+
+    clip-path: polygon(0 18%, 50% 57%, 100% 18%, 100% 100%, 0 100%);
+    box-shadow:
+        0 18px 32px rgba(0,0,0,0.34),
+        inset 0 2px 18px rgba(255,255,255,0.52);
+    pointer-events: none;
+}
+
+/* contenido por encima */
+.reto-label,
+.reto-texto {
+    position: relative;
+    z-index: 6;
+}
+
+.reto-label {
+    text-transform: uppercase;
+    font-size: 1.05rem;
+    color: var(--color-fondo);
+    margin-bottom: 1.2rem;
 }
 
 .reto-texto {
-    margin: 0;
-    font-size: 1.5em;
-    color: var(--color-fondo-secundario);
+    margin: 0 auto;
+    font-family: 'Edwardian';
+    font-size: 3em;
+    color: #6f1721;
+
+    text-shadow:
+        0.5px 0.5px 0 rgba(111,23,33,0.35),
+        -0.4px -0.4px 0 rgba(255,255,255,0.28);
+}
+
+/* detalle bordado */
+.reto-texto::before {
+    content: "✤";
+    display: block;
+    font-style: normal;
+    font-size: 1rem;
+    margin-top: 1.8rem;
+    color: #6f1721;
+}
+
+/* responsive reto */
+@media (max-width: 768px) {
+    .reto-section {
+        padding: 5rem 1rem;
+    }
+
+    .reto-title {
+        margin-bottom: 2rem;
+    }
+
+    .reto-card {
+        min-height: 390px;
+        padding: 4rem 1.6rem 8rem;
+    }
+
+    .reto-card::after {
+        left: -22px;
+        right: -22px;
+        height: 215px;
+    }
+
+    .reto-texto {
+        font-size: clamp(1.3rem, 6vw, 1.9rem);
+    }
 }
 
 /* sección 1.3 */
@@ -545,7 +703,7 @@ main {
 
 .backstage-title {
     font-family: 'Edwardian', cursive;
-    font-size: clamp(4rem, 10vw, 8rem);
+    font-size: 3em;
     color: var(--color-secundario);
     margin-bottom: 0;
     line-height: 0.85;
@@ -627,8 +785,8 @@ main {
     top: 10%;
     left: 7%;
     width: 75%;
-    height: 72%;
-    border-radius: 2.4rem / 1.7rem;
+    height: 75%;
+    border-radius: 1rem;
     overflow: hidden;
     background: #000;
     z-index: 3;
@@ -646,9 +804,8 @@ main {
     z-index: 5;
     pointer-events: none;
     background:
-        radial-gradient(circle at 35% 25%, rgba(255,255,255,0.28), transparent 18%),
         linear-gradient(135deg, rgba(255,255,255,0.16), transparent 45%),
-        radial-gradient(circle at center, transparent 45%, rgba(0,0,0,0.36) 100%);
+        radial-gradient(circle at center, transparent 25%, rgba(0,0,0,0.36) 100%);
     mix-blend-mode: screen;
 }
 
@@ -659,14 +816,7 @@ main {
     inset: 0;
     z-index: 6;
     pointer-events: none;
-    background:
-        repeating-linear-gradient(
-            to bottom,
-            rgba(255,255,255,0.08) 0px,
-            rgba(255,255,255,0.08) 1px,
-            transparent 3px,
-            transparent 5px
-        );
+    background: var(--color-ticket-primario);
     opacity: 0.5;
     mix-blend-mode: soft-light;
 }
@@ -1794,10 +1944,12 @@ main {
 
 /* TEXTO */
 .designer-description-wrapper {
-    margin-top: -0.3rem;
+    margin-top: -0.3rem !important;
+    margin-bottom: 3em;
     max-width: 760px;
     text-align: center;
     min-height: 4.2rem;
+    color: var(--color-ticket-secundario) !important;
 }
 #info-designer-content {
     padding-top: 0.55rem !important;
@@ -1806,27 +1958,16 @@ main {
 
 .designer-name {
     margin: 0 0 0.2rem;
+    font-family: 'Edwardian';
+    font-weight: 400 !important;
+    text-transform: capitalize !important;
 }
 
 .designer-text {
     margin: 0;
     font-size: 0.93rem;
     line-height: 1.42;
-    color: rgba(53,75,111,0.82);
-}
-.designer-name {
-    font-size: 1.55rem;
-    text-transform: uppercase;
-    letter-spacing: 0.16em;
-    margin: 0 0 0.5rem;
-    color: var(--color-ticket-text);
-}
-
-.designer-text {
-    margin: 0;
-    font-size: 0.98rem;
-    line-height: 1.6;
-    color: rgba(53,75,111,0.82);
+    color: var(--color-ticket-secundario) !important;
 }
 
 /* MICROTREND SECTION */
