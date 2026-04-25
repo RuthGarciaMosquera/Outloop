@@ -178,7 +178,6 @@ main {
 
 .navbar-enlace {
     color: white;
-    font-weight: 500;
     position: relative;
     transition: opacity 0.3s ease;
 }
@@ -321,6 +320,7 @@ main {
     pointer-events: none;
     overflow: hidden;
     background-color: #ffffff38;
+    width: 100vw;
 
     /* nuevo fondo */
     background-image: url('../media/img/1x/cinta.png');
@@ -2236,7 +2236,6 @@ main {
     color: var(--color-fondo-secundario);
     overflow: hidden;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     text-align: right;
     align-self: flex-end;
@@ -3232,7 +3231,6 @@ main {
         align-self: flex-start;
 
         display: -webkit-box;
-        -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
         overflow: hidden;
     }
