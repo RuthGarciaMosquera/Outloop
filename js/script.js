@@ -42,8 +42,11 @@ $(function() {
         }
     }
 
-// HEADER comportamiento scroll + click
+    // HEADER comportamiento scroll + click + menú móvil
 let headerClicked = false;
+
+const $menuMovil = $('.navbar-menu');
+const $iconoMenu = $('.navbar-menu-movil-icono');
 
 function shrinkHeader() {
     headerClicked = true;
@@ -51,105 +54,15 @@ function shrinkHeader() {
     $body.addClass('scrolled');
 }
 
-if ($body.is('.page-datos, .page-diseñadores')) {
-    shrinkHeader();
-} else {
-
-    $header.on('click', function(e) {
-        if (!$header.hasClass('scrolled')) {
-            e.preventDefault();
-            e.stopPropagation();
-            shrinkHeader();
-        }
-    });
-
-    $window.on('scroll', function() {
-        if ($window.scrollTop() > 50 || headerClicked) {
-            $header.addClass('scrolled');
-            $body.addClass('scrolled');
-        } else {
-            $header.removeClass('scrolled');
-            $body.removeClass('scrolled');
-        }
-    });
-
-}
-
-// login
-
-    const $viewLogin = $('#view-login');
-    const $viewRegistro = $('#view-registro');
-    const $viewExito = $('#view-exito');
-    const $botonesSuscripcion = $('.accion-abrir-registro, #btn-ir-registro');
-
-    $botonesSuscripcion.on('click', function(e) {
-        e.preventDefault();
-        
-        if ($('.navbar-menu').hasClass('menu-abierto')) {
-            $('.navbar-menu').removeClass('menu-abierto');
-            $('.navbar-menu-movil-icono').removeClass('icono-activo');
-            $body.removeClass('no-scroll');
-        }
-
-        if (loginModal) {
-            loginModal.show();
-            sessionStorage.setItem('popup_visto', 'true'); 
-
-            if (usuarioLogueado) {
-                $viewLogin.hide(); $viewRegistro.hide(); $viewExito.show();
-            } else {
-                $viewLogin.hide(); $viewExito.hide(); $viewRegistro.show();
-            }
-        }
-    });
-
-    $('#btn-ir-login').on('click', function(e) {
-        e.preventDefault(); $viewRegistro.hide(); $viewLogin.fadeIn(200);
-    });
-    
-    $('#btn-ir-registro').on('click', function(e) {
-         e.preventDefault(); $viewLogin.hide(); $viewRegistro.fadeIn(200);
-    });
-
-    $('#form-login, #form-registro').on('submit', function(e) {
-        e.preventDefault();
-        usuarioLogueado = true;
-        sessionStorage.setItem('usuario_logueado', 'true');
-        sessionStorage.setItem('popup_visto', 'true');
-        
-        $('.accion-abrir-registro').text("BIENVENIDO");
-
-        $viewLogin.hide(); $viewRegistro.hide(); $viewExito.fadeIn(200);
-    });
-
-    if (modalElement) {
-        modalElement.addEventListener('hidden.bs.modal', function () {
-            if (!usuarioLogueado) {
-                $viewRegistro.hide(); $viewExito.hide(); $viewLogin.show();
-                $('form').trigger("reset");
-            }
-        });
-    }
-
-    window.togglePass = function(idInput, btn) {
-        const input = document.getElementById(idInput);
-        if (input.type === "password") {
-            input.type = "text"; $(btn).css('color', '#000000'); 
-        } else {
-            input.type = "password"; $(btn).css('color', '#999999'); 
-        }
-    };
-
-const $menuMovil = $('.navbar-menu');
-const $logoNavbar = $('.navbar-logo');
-
 function abrirMenuMovil() {
     $menuMovil.addClass('menu-abierto');
+    $iconoMenu.addClass('icono-activo');
     $body.addClass('no-scroll');
 }
 
 function cerrarMenuMovil() {
     $menuMovil.removeClass('menu-abierto');
+    $iconoMenu.removeClass('icono-activo');
     $body.removeClass('no-scroll');
 }
 
@@ -161,29 +74,59 @@ function toggleMenuMovil() {
     }
 }
 
-$logoNavbar.on('click', function(e) {
-    if ($(window).width() <= 768) {
-        e.preventDefault();
-        e.stopPropagation();
-
-        if (!$header.hasClass('scrolled')) {
+if ($body.is('.page-datos, .page-diseñadores')) {
+    shrinkHeader();
+} else {
+    $window.on('scroll', function() {
+        if ($window.scrollTop() > 50 || headerClicked) {
             shrinkHeader();
         } else {
-            toggleMenuMovil();
+            $header.removeClass('scrolled');
+            $body.removeClass('scrolled');
+            cerrarMenuMovil();
         }
+    });
+}
+
+/* click en header grande: lo minimiza */
+$header.on('click', function(e) {
+    if (!$header.hasClass('scrolled')) {
+        e.preventDefault();
+        e.stopPropagation();
+        shrinkHeader();
     }
 });
 
+/* click en hamburguesa: abre/cierra menú */
+$iconoMenu.on('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if ($header.hasClass('scrolled')) {
+        toggleMenuMovil();
+    }
+});
+$('.navbar-logo').on('click', function(e) {
+    if ($header.hasClass('scrolled') && $window.width() <= 768) {
+        e.preventDefault();
+        e.stopPropagation();
+        toggleMenuMovil();
+    }
+});
+
+/* cerrar al clicar fuera de los tickets */
 $menuMovil.on('click', function(e) {
     if (e.target === this) {
         cerrarMenuMovil();
     }
 });
 
+/* cerrar al clicar en un enlace */
 $('.navbar-menu a').on('click', function() {
     cerrarMenuMovil();
 });
 
+// cursor
     const $cursor = $('.cursor-outline');
     if($cursor.length) {
         $window.on('mousemove', function(e){
