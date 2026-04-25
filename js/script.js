@@ -65,6 +65,18 @@ function cerrarMenuMovil() {
     $iconoMenu.removeClass('icono-activo');
     $body.removeClass('no-scroll');
 }
+$('.navbar-menu .accion-abrir-registro').on('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    cerrarMenuMovil();
+
+    if (loginModal) {
+        setTimeout(function() {
+            loginModal.show();
+        }, 250);
+    }
+});
 
 function toggleMenuMovil() {
     if ($menuMovil.hasClass('menu-abierto')) {
