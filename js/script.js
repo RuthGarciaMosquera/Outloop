@@ -42,7 +42,7 @@ $(function() {
         }
     }
 
-    // HEADER comportamiento scroll + click + menú móvil
+// HEADER comportamiento scroll + click + menú móvil
 let headerClicked = false;
 
 const $menuMovil = $('.navbar-menu');
