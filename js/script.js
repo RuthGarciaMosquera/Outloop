@@ -140,15 +140,49 @@ if ($body.is('.page-datos, .page-diseñadores')) {
         }
     };
 
-    const $iconoMenu = $('.navbar-menu-movil-icono');
-    const $menuMovil = $('.navbar-menu');
+const $menuMovil = $('.navbar-menu');
+const $logoNavbar = $('.navbar-logo');
 
-    $iconoMenu.on('click', function() {
-        $(this).toggleClass('icono-activo');
-        $menuMovil.toggleClass('menu-abierto');
-        if ($menuMovil.hasClass('menu-abierto')) $body.addClass('no-scroll');
-        else $body.removeClass('no-scroll');
-    });
+function abrirMenuMovil() {
+    $menuMovil.addClass('menu-abierto');
+    $body.addClass('no-scroll');
+}
+
+function cerrarMenuMovil() {
+    $menuMovil.removeClass('menu-abierto');
+    $body.removeClass('no-scroll');
+}
+
+function toggleMenuMovil() {
+    if ($menuMovil.hasClass('menu-abierto')) {
+        cerrarMenuMovil();
+    } else {
+        abrirMenuMovil();
+    }
+}
+
+$logoNavbar.on('click', function(e) {
+    if ($(window).width() <= 768) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        if (!$header.hasClass('scrolled')) {
+            shrinkHeader();
+        } else {
+            toggleMenuMovil();
+        }
+    }
+});
+
+$menuMovil.on('click', function(e) {
+    if (e.target === this) {
+        cerrarMenuMovil();
+    }
+});
+
+$('.navbar-menu a').on('click', function() {
+    cerrarMenuMovil();
+});
 
     const $cursor = $('.cursor-outline');
     if($cursor.length) {

@@ -68,6 +68,11 @@ a { text-decoration: none; color: inherit; }
 }
 .cursor-invertido { border-color: #ccd6e7; }
 
+/* main */
+main {
+    width: 100%;
+}
+
 /* index */
 .header-principal {
     position: fixed;
@@ -196,11 +201,6 @@ a { text-decoration: none; color: inherit; }
     color: var(--color-fondo);
 }
 
-/* main */
-main {
-    padding-top: 20px; 
-    width: 100vw;
-}
 
 /* fondo datos */
 
@@ -338,7 +338,8 @@ main {
     white-space: nowrap;
     font-family: 'Edwardian';
     color: var(--color-fondo);
-    line-hergb(9, 9, 9): 1; padding-right: 0; 
+    line-height: 1; 
+    padding-right: 0; 
     margin: 1rem;
 }
 
