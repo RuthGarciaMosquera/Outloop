@@ -134,7 +134,7 @@ $menuMovil.on('click', function(e) {
 });
 
 /* cerrar al clicar en un enlace */
-$('.navbar-menu a').on('click', function() {
+$('.navbar-menu a').not('.accion-abrir-registro').on('click', function() {
     cerrarMenuMovil();
 });
 
