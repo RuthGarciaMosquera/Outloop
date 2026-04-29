@@ -1302,15 +1302,12 @@ main {
 
 .designer-name {
     margin: 0 0 0.2rem;
-    font-family: 'Edwardian';
-    font-weight: 400 !important;
-    text-transform: capitalize !important;
+    font-size: 2em;
 }
 
 .designer-text {
     margin: 0;
-    font-size: 0.93rem;
-    line-height: 1.42;
+    font-size: 1em;
     color: var(--color-ticket-secundario) !important;
 }
 
