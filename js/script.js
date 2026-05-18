@@ -860,7 +860,7 @@ if (quizBtn && quizModal && quizContent && quizNext && quizRestart) {
             </div>
         `;
 
-        quizProgress.textContent = "SEE YOU OUTSIDE THE LOOP";
+        quizProgress.textContent = "Step outside the loop";
         quizNext.style.display = "none";
         quizRestart.style.display = "inline-block";
     }
