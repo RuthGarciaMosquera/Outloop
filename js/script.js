@@ -892,4 +892,15 @@ if (quizBtn && quizModal && quizContent && quizNext && quizRestart) {
     });
 }
 
+// FOOTER MISIÓN / VISIÓN / VALORES
+const footerInfoCards = document.querySelectorAll(".footer-info-card");
+
+if (footerInfoCards.length) {
+    footerInfoCards.forEach(card => {
+        card.addEventListener("click", function () {
+            this.classList.toggle("is-open");
+        });
+    });
+}
+
 });
