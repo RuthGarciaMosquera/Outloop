@@ -152,7 +152,7 @@ main {
     height: 5em;
     background-color: #00000036;
     backdrop-filter: blur(10px);
-    box-shadow: 0 2px 10px #350409a8;
+    box-shadow: 0 2px 10px #ffffffa8;
 }
 .header-principal.scrolled .header-intro-image {
     opacity: 0;
@@ -239,7 +239,7 @@ main {
 
 /* sección 1.1 */
 .page-index {
-    background-color: var(--color-fondo);
+    background-color: black;
 }
 .hero-collage-section {
     position: relative;
@@ -2342,9 +2342,9 @@ main {
 
 /* FOOTER */
 .footer-principal {
-    padding-bottom: 0 !important;
     border-top: none !important;
     color: var(--color-secundario);
+    margin-top: 2em !important;
 }
 .footer-img-box {
     width: 100%; 
@@ -2363,6 +2363,9 @@ main {
     object-fit: cover; 
 }
 .footer-img-box:hover { transform: scale(1.04); }
+.footer-text {
+    color: var(--color-secundario);
+}
 
 
 /* RESPONSIVE */
