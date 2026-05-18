@@ -832,7 +832,7 @@ if (quizBtn && quizModal && quizContent && quizNext && quizRestart) {
             </div>
         `;
 
-        quizProgress.textContent = `QUESTION ${currentQuestion + 1} / ${quizQuestions.length}`;
+        quizProgress.textContent = `Question ${currentQuestion + 1} / ${quizQuestions.length}`;
 
         document.querySelectorAll(".consumer-option input").forEach(input => {
             input.addEventListener("change", function() {

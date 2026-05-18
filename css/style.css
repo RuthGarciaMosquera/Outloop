@@ -2570,15 +2570,14 @@ main {
 
 .consumer-quiz-kicker,
 .consumer-quiz-progress {
-    font-family: 'VT323', monospace;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
+    font-family: 'Edwardian';
+    font-size: 2em;
     color: rgba(53,75,111,0.72);
 }
 
 .consumer-quiz-card h2 {
     font-family: 'Libre Baskerville', serif;
-    font-size: 1.6rem;
+    font-size: 1rem;
     margin: 0.5rem 0 1rem;
     color: var(--color-fondo);
 }
@@ -2612,8 +2611,8 @@ main {
 
 .consumer-option:hover,
 .consumer-option.is-selected {
-    background: var(--color-fondo-secundario);
-    color: var(--color-fondo);
+    background: var(--color-ticket-primario);
+    color: var(--color-ticket-secundario);
     transform: rotate(-1deg);
 }
 
@@ -2642,28 +2641,6 @@ main {
 
 .consumer-quiz-actions {
     margin-top: 1.4rem;
-}
-
-@media (max-width: 768px) {
-    .consumer-fixed-btn {
-        right: 1rem;
-        bottom: 1rem;
-        top: auto;
-        transform: none;
-        transform-origin: center;
-        border-radius: 999px;
-        font-size: 0.95rem;
-        padding: 0.75rem 1rem;
-        max-width: 78vw;
-    }
-
-    .consumer-quiz-card {
-        padding: 2rem 1.2rem 1.6rem;
-    }
-
-    .consumer-result-title {
-        font-size: 2.5rem;
-    }
 }
 
 
@@ -3595,4 +3572,28 @@ main {
     .footer-info-panel p {
         font-size: 0.82rem;
     }
+
+/* CUESTIONARIO */
+@media (max-width: 768px) {
+    .consumer-fixed-btn {
+        right: 1rem;
+        bottom: 1rem;
+        top: auto;
+        transform: none;
+        transform-origin: center;
+        border-radius: 999px;
+        font-size: 0.95rem;
+        padding: 0.75rem 1rem;
+        max-width: 78vw;
+    }
+
+    .consumer-quiz-card {
+        padding: 2rem 1.2rem 1.6rem;
+    }
+
+    .consumer-result-title {
+        font-size: 2.5rem;
+    }
+}
+
 }
