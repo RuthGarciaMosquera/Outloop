@@ -685,5 +685,211 @@ if (grid && mesTexto && prevMesBtn && nextMesBtn) {
             }
         });
     }
+// CUESTIONARIO CONSUMIDORES
+// CUESTIONARIO TIPO DE CONSUMIDOR
+const quizBtn = document.getElementById("consumerQuizBtn");
+const quizModal = document.getElementById("consumerQuizModal");
+const quizClose = document.getElementById("consumerQuizClose");
+const quizContent = document.getElementById("consumerQuizContent");
+const quizNext = document.getElementById("consumerQuizNext");
+const quizRestart = document.getElementById("consumerQuizRestart");
+const quizProgress = document.getElementById("consumerQuizProgress");
+const quizTitle = document.getElementById("consumerQuizTitle");
+
+if (quizBtn && quizModal && quizContent && quizNext && quizRestart) {
+    const quizQuestions = [
+        {
+            question: "Cuando compras ropa, ¿qué pesa más en tu decisión?",
+            answers: [
+                { text: "Que sea barata y llegue rápido.", type: "impulse" },
+                { text: "Que encaje con lo que veo en redes o tendencias.", type: "trend" },
+                { text: "Que sea una prenda diferente, con historia o de segunda mano.", type: "curator" },
+                { text: "Que sea duradera, ética o de bajo impacto.", type: "conscious" },
+                { text: "Que realmente la necesite y combine con lo que ya tengo.", type: "minimal" }
+            ]
+        },
+        {
+            question: "Si ves una microtendencia viral, ¿qué haces?",
+            answers: [
+                { text: "La compro antes de que pase de moda.", type: "trend" },
+                { text: "Busco una versión barata.", type: "impulse" },
+                { text: "La busco vintage, customizada o de segunda mano.", type: "curator" },
+                { text: "Investigo si merece la pena y quién la produce.", type: "conscious" },
+                { text: "La dejo pasar si no encaja con mi estilo real.", type: "minimal" }
+            ]
+        },
+        {
+            question: "¿Qué pasa con la ropa que ya no usas?",
+            answers: [
+                { text: "Se queda en el armario bastante tiempo.", type: "impulse" },
+                { text: "La cambio rápido para hacer sitio a cosas nuevas.", type: "trend" },
+                { text: "La vendo, intercambio o busco darle otra vida.", type: "curator" },
+                { text: "La reparo, dono o reciclo de forma consciente.", type: "conscious" },
+                { text: "Intento no acumular prendas que no uso.", type: "minimal" }
+            ]
+        },
+        {
+            question: "¿Cómo describirías tu armario?",
+            answers: [
+                { text: "Lleno, pero muchas veces siento que no tengo nada que ponerme.", type: "impulse" },
+                { text: "Cambia mucho según la temporada y lo que se lleva.", type: "trend" },
+                { text: "Mezcla prendas antiguas, especiales y hallazgos únicos.", type: "curator" },
+                { text: "Tiene prendas elegidas por calidad, origen o materiales.", type: "conscious" },
+                { text: "Reducido, funcional y bastante pensado.", type: "minimal" }
+            ]
+        },
+        {
+            question: "Antes de comprar una prenda nueva, normalmente...",
+            answers: [
+                { text: "La compro si me gusta en el momento.", type: "impulse" },
+                { text: "Pienso si la he visto mucho y si está en tendencia.", type: "trend" },
+                { text: "Miro si puedo encontrar algo parecido de segunda mano.", type: "curator" },
+                { text: "Reviso materiales, marca, durabilidad y condiciones.", type: "conscious" },
+                { text: "Me pregunto si la usaré al menos muchas veces.", type: "minimal" }
+            ]
+        }
+    ];
+
+    const quizResults = {
+        impulse: {
+            title: "The Loop Buyer",
+            text: "Tu consumo está muy atravesado por la inmediatez: precio, rapidez y deseo del momento. No significa que no te importe el impacto, pero muchas decisiones nacen del impulso y del sistema de compra constante que alimenta la moda rápida.",
+            tag: "compra rápida / deseo inmediato"
+        },
+        trend: {
+            title: "The Microtrend Chaser",
+            text: "Tu armario dialoga directamente con redes, estética viral y tendencias pasajeras. Te interesa expresarte, pero corres el riesgo de comprar prendas que pierden valor para ti cuando desaparece la tendencia.",
+            tag: "tendencia / viralidad / rotación"
+        },
+        curator: {
+            title: "The Second-Hand Curator",
+            text: "Buscas diferenciarte y dar valor a prendas que ya existen. La segunda mano, el intercambio o la customización forman parte de tu manera de consumir, aunque el reto está en que lo circular no se convierta también en sobreconsumo.",
+            tag: "segunda mano / identidad / hallazgo"
+        },
+        conscious: {
+            title: "The Conscious Researcher",
+            text: "Antes de comprar, sueles investigar. Te interesan la durabilidad, los materiales, la ética y el impacto ambiental. Tu consumo es más lento y reflexivo, aunque puede requerir más tiempo y acceso a información clara.",
+            tag: "impacto / ética / trazabilidad"
+        },
+        minimal: {
+            title: "The Wardrobe Editor",
+            text: "Tu relación con la moda se basa en editar, reducir y aprovechar. No compras tanto por novedad, sino por coherencia con tu estilo y uso real. Tu armario funciona como una selección, no como acumulación.",
+            tag: "menos prendas / más uso / criterio"
+        }
+    };
+
+    let currentQuestion = 0;
+    let selectedAnswer = null;
+    let scores = {
+        impulse: 0,
+        trend: 0,
+        curator: 0,
+        conscious: 0,
+        minimal: 0
+    };
+
+    function openQuiz() {
+        resetQuiz();
+        quizModal.classList.add("is-open");
+        document.body.classList.add("no-scroll");
+    }
+
+    function closeQuiz() {
+        quizModal.classList.remove("is-open");
+        document.body.classList.remove("no-scroll");
+    }
+
+    function resetQuiz() {
+        currentQuestion = 0;
+        selectedAnswer = null;
+        scores = {
+            impulse: 0,
+            trend: 0,
+            curator: 0,
+            conscious: 0,
+            minimal: 0
+        };
+
+        quizTitle.textContent = "¿Qué tipo de consumidor de moda eres?";
+        quizNext.style.display = "inline-block";
+        quizRestart.style.display = "none";
+        renderQuestion();
+    }
+
+    function renderQuestion() {
+        selectedAnswer = null;
+        const q = quizQuestions[currentQuestion];
+
+        quizContent.innerHTML = `
+            <p class="consumer-question">${q.question}</p>
+            <div class="consumer-options">
+                ${q.answers.map((answer, index) => `
+                    <label class="consumer-option">
+                        <input type="radio" name="consumerAnswer" value="${answer.type}" data-index="${index}">
+                        ${answer.text}
+                    </label>
+                `).join("")}
+            </div>
+        `;
+
+        quizProgress.textContent = `QUESTION ${currentQuestion + 1} / ${quizQuestions.length}`;
+
+        document.querySelectorAll(".consumer-option input").forEach(input => {
+            input.addEventListener("change", function() {
+                selectedAnswer = this.value;
+
+                document.querySelectorAll(".consumer-option").forEach(label => {
+                    label.classList.remove("is-selected");
+                });
+
+                this.closest(".consumer-option").classList.add("is-selected");
+            });
+        });
+    }
+
+    function showResult() {
+        let winner = Object.keys(scores).reduce((a, b) => scores[a] >= scores[b] ? a : b);
+        const result = quizResults[winner];
+
+        quizTitle.textContent = "Resultado";
+        quizContent.innerHTML = `
+            <div class="consumer-result">
+                <h3 class="consumer-result-title">${result.title}</h3>
+                <p class="consumer-result-text">${result.text}</p>
+                <span class="consumer-result-tag">${result.tag}</span>
+            </div>
+        `;
+
+        quizProgress.textContent = "SEE YOU OUTSIDE THE LOOP";
+        quizNext.style.display = "none";
+        quizRestart.style.display = "inline-block";
+    }
+
+    quizNext.addEventListener("click", function() {
+        if (!selectedAnswer) {
+            quizProgress.textContent = "Choose one answer to keep going.";
+            return;
+        }
+
+        scores[selectedAnswer]++;
+
+        if (currentQuestion < quizQuestions.length - 1) {
+            currentQuestion++;
+            renderQuestion();
+        } else {
+            showResult();
+        }
+    });
+
+    quizRestart.addEventListener("click", resetQuiz);
+    quizBtn.addEventListener("click", openQuiz);
+    quizClose.addEventListener("click", closeQuiz);
+
+    quizModal.addEventListener("click", function(e) {
+        if (e.target === quizModal) {
+            closeQuiz();
+        }
+    });
+}
 
 });

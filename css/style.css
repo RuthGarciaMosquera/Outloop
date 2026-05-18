@@ -2367,6 +2367,191 @@ main {
     color: var(--color-secundario);
 }
 
+/* CUESTIONARIO DE CONSUMIDORES */
+/* BOTÓN FIJO CUESTIONARIO */
+.consumer-fixed-btn {
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%) rotate(-90deg);
+    transform-origin: right bottom;
+    z-index: 3500;
+
+    background: #ebe5cd05;
+    color: var(--color-secundario);
+    border: 1px solid rgba(255, 255, 255, 0.762);
+    box-shadow: inset 0 2px 10px #fff0f2a8, 0 8px 22px rgba(0,0,0,0.28);
+
+    font-family: 'VT323', monospace;
+    font-size: 1.15rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+
+    padding: 0.75rem 1.4rem;
+    border-radius: 1.5rem 1.5rem 0 0;
+    transition: 0.3s ease;
+}
+
+.consumer-fixed-btn:hover {
+    background-color: var(--color-secundario);
+    color: var(--color-fondo);
+    box-shadow: 0 2px 14px #fff0f2a8;
+}
+
+/* MODAL CUESTIONARIO */
+.consumer-quiz-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.58);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    z-index: 6000;
+}
+
+.consumer-quiz-modal.is-open {
+    display: flex;
+}
+
+.consumer-quiz-card {
+    width: min(560px, 94vw);
+    max-height: 88vh;
+    overflow-y: auto;
+    position: relative;
+
+    background: var(--color-secundario);
+    color: var(--color-ticket-primario);
+    padding: 2.2rem 2rem 2rem;
+    box-shadow: 0 18px 45px rgba(0,0,0,0.45);
+    text-align: center;
+}
+
+.consumer-quiz-card::after {
+    content: "";
+    position: absolute;
+    bottom: -15px;
+    left: 0;
+    width: 100%;
+    height: 15px;
+    background-image:
+        linear-gradient(135deg, var(--color-secundario) 5px, transparent 5px),
+        linear-gradient(225deg, var(--color-secundario) 5px, transparent 5px);
+    background-position: top left;
+    background-size: 15px 15px;
+    background-repeat: repeat-x;
+}
+
+.consumer-quiz-close {
+    position: absolute;
+    top: 0.7rem;
+    right: 1rem;
+    border: none;
+    background: transparent;
+    color: var(--color-ticket-primario);
+    font-size: 2rem;
+    line-height: 1;
+    z-index: 5;
+}
+
+.consumer-quiz-kicker,
+.consumer-quiz-progress {
+    font-family: 'VT323', monospace;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(53,75,111,0.72);
+}
+
+.consumer-quiz-card h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.6rem;
+    margin: 0.5rem 0 1rem;
+    color: var(--color-fondo);
+}
+
+.consumer-question {
+    font-size: 1.05rem;
+    margin-bottom: 1.4rem;
+}
+
+.consumer-options {
+    display: grid;
+    gap: 0.8rem;
+    text-align: left;
+}
+
+.consumer-option {
+    position: relative;
+    display: block;
+    padding: 0.85rem 1rem;
+    border: 1px dashed rgba(53,75,111,0.45);
+    background: rgba(255,255,255,0.28);
+    font-family: 'VT323', monospace;
+    font-size: 1.18rem;
+    color: var(--color-ticket-primario);
+    transition: 0.25s ease;
+}
+
+.consumer-option input {
+    margin-right: 0.6rem;
+}
+
+.consumer-option:hover,
+.consumer-option.is-selected {
+    background: var(--color-fondo-secundario);
+    color: var(--color-fondo);
+    transform: rotate(-1deg);
+}
+
+.consumer-result-title {
+    font-family: 'Edwardian';
+    font-size: 3.2rem;
+    color: var(--color-fondo);
+    line-height: 0.95;
+    margin-bottom: 1rem;
+}
+
+.consumer-result-text {
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.consumer-result-tag {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.45rem 0.9rem;
+    border: 1px dashed var(--color-ticket-primario);
+    font-family: 'VT323', monospace;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.consumer-quiz-actions {
+    margin-top: 1.4rem;
+}
+
+@media (max-width: 768px) {
+    .consumer-fixed-btn {
+        right: 1rem;
+        bottom: 1rem;
+        top: auto;
+        transform: none;
+        transform-origin: center;
+        border-radius: 999px;
+        font-size: 0.95rem;
+        padding: 0.75rem 1rem;
+        max-width: 78vw;
+    }
+
+    .consumer-quiz-card {
+        padding: 2rem 1.2rem 1.6rem;
+    }
+
+    .consumer-result-title {
+        font-size: 2.5rem;
+    }
+}
+
 
 /* RESPONSIVE */
 /* RESPONSIVE HEADER / MENÚ MÓVIL */

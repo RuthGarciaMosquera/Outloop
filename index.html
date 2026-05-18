@@ -242,6 +242,35 @@
 
       </div>
     </footer>
+    
+<!-- BOTÓN FIJO + MODAL CUESTIONARIO CONSUMIDOR -->
+<button id="consumerQuizBtn" class="consumer-fixed-btn">
+  ¿QUÉ TIPO DE CONSUMIDOR ERES?
+</button>
+
+<div id="consumerQuizModal" class="consumer-quiz-modal">
+  <div class="consumer-quiz-card">
+    <button id="consumerQuizClose" class="consumer-quiz-close" aria-label="Cerrar">×</button>
+
+    <div class="receipt-tape"></div>
+
+    <p class="consumer-quiz-kicker">OUTLOOP TEST</p>
+    <h2 id="consumerQuizTitle">¿Qué tipo de consumidor de moda eres?</h2>
+
+    <div class="receipt-divider mb-3">
+      <span>**********************************</span>
+    </div>
+
+    <div id="consumerQuizContent"></div>
+
+    <div class="consumer-quiz-actions">
+      <button id="consumerQuizNext" class="btn btn-dark btn-ticket">NEXT</button>
+      <button id="consumerQuizRestart" class="btn btn-dark btn-ticket" style="display:none;">REPEAT TEST</button>
+    </div>
+
+    <p class="consumer-quiz-progress" id="consumerQuizProgress"></p>
+  </div>
+</div>
 
 <!-- MODAL DE REGISTRO -->
     <div class="modal fade" id="modalLogin" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
