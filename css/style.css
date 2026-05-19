@@ -200,6 +200,10 @@ main {
     color: var(--color-fondo);
 }
 
+.invitation {
+    font-family: 'Edwardian';
+    font-size: 2.5em;
+}
 
 /* fondo datos */
 
